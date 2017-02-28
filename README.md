@@ -10,9 +10,12 @@ The **DOM Helper** is a light-weight JavaScript library designed to provide a mo
 [MDN]: (https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
 
 > A **node** is the generic name for any type of object in the DOM hierarchy. A node could be:
-1. one of the built-in DOM elements, such as `document` or `document.body`
-2. it could be an HTML tag specified in the HTML, such as `<input>` or `<p>`
-3. or it could be a text node that is created by the system to hold a block of text inside another element
+
+>1. one of the built-in DOM elements, such as `document` or `document.body`
+
+>2. it could be an HTML tag specified in the HTML, such as `<input>` or `<p>`
+
+>3. or it could be a text node that is created by the system to hold a block of text inside another element
 
 > In a nutshell, a node is any DOM object!
 >   - [jfriend00][so-link1] on StackOverflow
@@ -51,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 ```
 
 In total, this method can receive four different types of arguments:
+
 1. *string*: selects all elements matching the given CSS selector and converts them into a DOM Helper collection
 2. *single HTML element*: converts element to a DOM Helper collection
 3. *array of HTML elements*: converts elements to a DOM Helper collection
