@@ -7,7 +7,6 @@ The **DOM Helper** is a light-weight JavaScript library designed to provide a mo
 
 > **The Document Object Model** (DOM) is a programming interface for HTML and XML documents [that] provides a structured representation of the document... as a group of nodes and objects that have properties and methods.
 > - [Mozilla Developer Network] [MDN]
-
 [MDN]: (https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
 
 > A **node** is the generic name for any type of object in the DOM hierarchy. A node could be:
