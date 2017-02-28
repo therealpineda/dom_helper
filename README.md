@@ -7,6 +7,7 @@ The **DOM Helper** is a light-weight JavaScript library designed to provide a mo
 
 > **The Document Object Model** (DOM) is a programming interface for HTML and XML documents [that] provides a structured representation of the document... as a group of nodes and objects that have properties and methods.
 > - [Mozilla Developer Network] [MDN]
+
 [MDN]: (https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
 
 > A **node** is the generic name for any type of object in the DOM hierarchy. A node could be:
@@ -99,7 +100,8 @@ Removes the element(s) in the DH collection as well as any of their content enti
 #### `on(eventType, callback)`
 Sets an event handler of a specific eventType on the selected node(s), that executes a given callback function. This method can be used to set multiple functions on the same event type.
 
-Event types include: `'click'`, `'dblclick'`, `'mouseover'`, `'keypress'`, `'select'`, etc. Full list [here][ev-list]! :wine_glass:
+Event types include: `'click'`, `'dblclick'`, `'mouseover'`, `'keypress'`, `'select'`, etc. Full list on [MDN][ev-list]! :wine_glass:
+
 [ev-list]: (https://developer.mozilla.org/en-US/docs/Web/Events)
 
 -*THE CODE!*
