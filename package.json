@@ -1,0 +1,20 @@
+{
+  "name": "dom_helper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "webpack": "webpack",
+    "postinstall": "webpack"
+  },
+  "author": "Christopher Pineda",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^3.16.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-import": "^2.2.0"
+  }
+}
