@@ -100,9 +100,7 @@ Removes the element(s) in the DH collection as well as any of their content enti
 #### `on(eventType, callback)`
 Sets an event handler of a specific eventType on the selected node(s), that executes a given callback function. This method can be used to set multiple functions on the same event type.
 
-Event types include: `'click'`, `'dblclick'`, `'mouseover'`, `'keypress'`, `'select'`, etc. Full list on [MDN][ev-list]! :wine_glass:
-
-[ev-list]: (https://developer.mozilla.org/en-US/docs/Web/Events)
+Event types include: `'click'`, `'dblclick'`, `'mouseover'`, `'keypress'`, `'select'`, etc. Full list on [MDN](https://developer.mozilla.org/en-US/docs/Web/Events)! :wine_glass:
 
 -*THE CODE!*
 
