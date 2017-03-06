@@ -39,7 +39,7 @@ Allows any HTML element(s) to be turned into a DOM Helper (DH) element collectio
 
 This method can also be used to set callback function(s), which will be executed when the entire document is loaded.
 
--*OMG, HOW?!*
+-*COOL!*
 ```js
 const docReadyFunctions = [];
 
@@ -124,7 +124,7 @@ Turns off all event handlers of a given eventType.
 ### AJAX
 
 #### `$dh.ajax(options)`
-Makes an asynchronous XMLHTTPRequest to request, send, display, and/or use data from a web server.  Takes an options object as its arguments -- the options and their defaults include:
+Makes an asynchronous XMLHTTPRequest to request, send, display, and/or use data from a web server.  Returns a JS [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) object. Takes an options object as its arguments -- the options and their defaults include:
 
 option | default
 --- | ---
