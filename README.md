@@ -1,9 +1,18 @@
-### DOM HELPER (DH)
-:thumbsup: :thumbsup:
+# DOM HELPER
 
-The **DOM Helper** is a light-weight JavaScript library designed to provide a more efficient interface with the HTML element nodes on a website.
+The **DOM Helper (DH)** is a lightweight JavaScript library, similar to jQuery, that is designed to provide a more efficient interface with the HTML element nodes on a website.
+
+* [jQuery bundle size][jQuery] for version 3.5.1: 30.4kB gzipped
+
+[jQuery]: (https://bundlephobia.com/result?p=jquery)
+
+Live _demo_ (coming soon)!
+
+[demo]: (https://www.therealpineda.github.io/)
 
 ---
+## API Documentation
+
 
 > **The Document Object Model** (DOM) is a programming interface for HTML and XML documents [that] provides a structured representation of the document... as a group of nodes and objects that have properties and methods.
 > - [Mozilla Developer Network] [MDN]
@@ -28,18 +37,13 @@ The **DOM Helper** is a light-weight JavaScript library designed to provide a mo
 
 [so-link2]: (http://stackoverflow.com/questions/9979172/difference-between-node-object-and-element-object/16014680#16014680)
 
----
-
-## Methods
-
-### :sparkles: (Magical) Factory Method
+### :sparkles: Factory Method
 
 #### `$dh(selector/element(s)/function)`
 Allows any HTML element(s) to be turned into a DOM Helper (DH) element collection, allowing access to all the awesome DOM Helper methods!
 
 This method can also be used to set callback function(s), which will be executed when the entire document is loaded.
 
--*COOL!*
 ```js
 const docReadyFunctions = [];
 
@@ -101,8 +105,6 @@ Removes the element(s) in the DH collection as well as any of their content enti
 Sets an event handler of a specific eventType on the selected node(s), that executes a given callback function. This method can be used to set multiple functions on the same event type.
 
 Event types include: `'click'`, `'dblclick'`, `'mouseover'`, `'keypress'`, `'select'`, etc. Full list on [MDN](https://developer.mozilla.org/en-US/docs/Web/Events)! :wine_glass:
-
--*THE CODE!*
 
 ```js
 on(type, func) {
