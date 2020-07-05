@@ -1,16 +1,48 @@
 {
   "name": "dom_helper",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "lightweight JavaScript library, similar to jQuery, designed to provide a more efficient interface with the HTML element nodes on a website",
+  "main": "./dist/index.js",
   "scripts": {
+    "build": "rm -rf build/; npm run lint || exit 1; webpack --mode production",
     "lint": "eslint",
-    "test": ""
+    "prepublishOnly": "npm run build"
   },
+  "keywords": [
+    "DOM",
+    "HTML",
+    "jQuery"
+  ],
   "author": "Christopher Pineda",
-  "license": "ISC",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/therealpineda/dom_helper.git"
+  },
+  "homepage": "https://github.com/therealpineda/dom_helper",
+  "bugs": {
+    "url": "https://github.com/therealpineda/dom_helper/issues",
+    "email": "pineda.christopher@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
+    "@babel/core": "7.10.4",
+    "babel-loader": "8.1.0",
     "eslint": "7.4.0",
     "eslint-config-airbnb-base": "14.2.0",
-    "eslint-plugin-import": "2.22.0"
-  }
+    "eslint-plugin-import": "2.22.0",
+    "webpack": "4.43.0",
+    "webpack-cli": "3.3.12"
+  },
+  "browserslist": [
+    "defaults",
+    "not ie < 11",
+    "last 2 versions",
+    "> 1%",
+    "iOS 7",
+    "last 3 iOS versions"
+  ]
 }

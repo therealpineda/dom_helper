@@ -1,5 +1,4 @@
-lib/dom_helper.js
-lib/dom_helper.js.map
+dist/
 
 node_modules/
 
