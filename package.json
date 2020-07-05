@@ -4,7 +4,7 @@
   "description": "lightweight JavaScript library, similar to jQuery, designed to provide a more efficient interface with the HTML element nodes on a website",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "rm -rf build/; npm run lint || exit 1; webpack --mode production",
+    "build": "rm -rf dist/; npm run lint || exit 1; webpack --mode production",
     "lint": "eslint",
     "prepublishOnly": "npm run build"
   },

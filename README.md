@@ -2,47 +2,30 @@
 
 The **DOM Helper (DH)** is a lightweight JavaScript library, similar to jQuery, that is designed to provide a more efficient interface with the HTML element nodes on a website.
 
-* [jQuery bundle size][jQuery] for version 3.5.1: 30.4kB gzipped
-
-[jQuery]: (https://bundlephobia.com/result?p=jquery)
+* [jQuery bundle size](https://bundlephobia.com/result?p=jquery) for version 3.5.1: 30.4kB gzipped
 
 Live _demo_ (coming soon)!
-
-[demo]: (https://www.therealpineda.github.io/)
 
 ---
 ## API Documentation
 
-
 > **The Document Object Model** (DOM) is a programming interface for HTML and XML documents [that] provides a structured representation of the document... as a group of nodes and objects that have properties and methods.
-> - [Mozilla Developer Network] [MDN]
-
-[MDN]: (https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
+> - [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
 
 > A **node** is the generic name for any type of object in the DOM hierarchy. A node could be:
-
 >1. one of the built-in DOM elements, such as `document` or `document.body`
-
 >2. it could be an HTML tag specified in the HTML, such as `<input>` or `<p>`
-
 >3. or it could be a text node that is created by the system to hold a block of text inside another element
-
 > In a nutshell, a node is any DOM object!
->   - [jfriend00][so-link1] on StackOverflow
-
-[so-link1]: (http://stackoverflow.com/questions/9979172/difference-between-node-object-and-element-object/9979779#9979779)
+>   - [jfriend00](http://stackoverflow.com/questions/9979172/difference-between-node-object-and-element-object/9979779#9979779) on StackOverflow
 
 > **Element** inherits from Node. Element objects actually represent the objects as specified in the HTML file by their tags, such as `<div id="content"></div>`... (Some Node objects are text nodes and they are not Element objects!)
-> - [太極者無極而生][so-link2] on StackOverflow
-
-[so-link2]: (http://stackoverflow.com/questions/9979172/difference-between-node-object-and-element-object/16014680#16014680)
+> - [太極者無極而生](http://stackoverflow.com/questions/9979172/difference-between-node-object-and-element-object/16014680#16014680) on StackOverflow
 
 ### :sparkles: Factory Method
 
 #### `$dh(selector/element(s)/function)`
-Allows any HTML element(s) to be turned into a DOM Helper (DH) element collection, allowing access to all the awesome DOM Helper methods!
-
-This method can also be used to set callback function(s), which will be executed when the entire document is loaded.
+Allows any HTML element(s) to be turned into a DOM Helper (DH) element collection, allowing access to all the awesome DOM Helper methods! This method can also be used to set callback function(s), which will be executed when the entire document is loaded.
 
 ```js
 const docReadyFunctions = [];
@@ -58,8 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-In total, this method can receive four different types of arguments:
-
+This method can receive four different types of arguments:
 1. *string*: selects all elements matching the given CSS selector and converts them into a DOM Helper collection
 2. *single HTML element*: converts element to a DOM Helper collection
 3. *array of HTML elements*: converts elements to a DOM Helper collection
@@ -104,7 +86,7 @@ Removes the element(s) in the DH collection as well as any of their content enti
 #### `on(eventType, callback)`
 Sets an event handler of a specific eventType on the selected node(s), that executes a given callback function. This method can be used to set multiple functions on the same event type.
 
-Event types include: `'click'`, `'dblclick'`, `'mouseover'`, `'keypress'`, `'select'`, etc. Full list on [MDN](https://developer.mozilla.org/en-US/docs/Web/Events)! :wine_glass:
+Event types include: `'click'`, `'dblclick'`, `'mouseover'`, `'keypress'`, `'select'`, etc. Full list on [MDN](https://developer.mozilla.org/en-US/docs/Web/Events)
 
 ```js
 on(type, func) {
@@ -126,7 +108,7 @@ Turns off all event handlers of a given eventType.
 ### AJAX
 
 #### `$dh.ajax(options)`
-Makes an asynchronous XMLHTTPRequest to request, send, display, and/or use data from a web server.  Returns a JS [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) object. Takes an options object as its arguments -- the options and their defaults include:
+Makes an asynchronous XMLHTTPRequest to request, send, display, and/or use data from a web server.  Returns a promise. Takes an options object as its arguments -- default options:
 
 option | default
 --- | ---
@@ -137,4 +119,4 @@ data | `{}`
 success | `() => {}`
 error | `() => {}`
 
-*** This method uses `$dh.extends(target, options)` to merge the options argument with the default values.
+** Uses `$dh.extends(target, options)` to merge the options argument with the default values.
