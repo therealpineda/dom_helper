@@ -1,5 +1,5 @@
 {
-  "name": "dom_helper",
+  "name": "@therealpineda/dom_helper",
   "version": "0.0.1",
   "description": "lightweight JavaScript library, similar to jQuery, designed to provide a more efficient interface with the HTML element nodes on a website",
   "main": "./dist/index.js",
