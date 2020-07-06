@@ -1,37 +1,46 @@
 class DOMNodeCollection {
   constructor(HTMLElements) {
+    if (!Array.isArray(HTMLElements) || !HTMLElements.length) {
+      throw DOMNodeCollection.CONSTRUCTOR_ERROR;
+    }
+
     this.HTMLElements = HTMLElements;
+    this.length = HTMLElements.length;
   }
 
-  html(string) {
+  html(string = null) {
     if (string) {
-      this.HTMLElements.forEach((el) => {
+      // assigns html content of all elements
+      this.HTMLElements.forEach(el => {
         el.innerHTML = string;
       });
       return this.HTMLElements;
     }
+    // returns for first-matched element
     return this.HTMLElements[0].innerHTML;
   }
 
   empty() {
-    this.HTMLElements.forEach((el) => {
+    // removes html content of all elements
+    this.HTMLElements.forEach(el => {
       el.innerHTML = '';
     });
   }
 
   append(children) {
+    // uses cloneNode since same node can't be in multiple places
     if (typeof children === 'string') {
-      this.HTMLElements.forEach((parent) => {
-        parent.innerHTML += children;
+      this.HTMLElements.forEach(node => {
+        node.innerHTML += children;
       });
     } else if (children instanceof HTMLElement) {
-      this.HTMLElements.forEach((parent) => {
-        parent.appendChild(children);
+      this.HTMLElements.forEach(node => {
+        node.appendChild(children.cloneNode(true));
       });
-    } else {
-      this.HTMLElements.forEach((parent) => {
-        children.HTMLElements.forEach((child) => {
-          parent.appendChild(child);
+    } else if (children instanceof DOMNodeCollection) {
+      this.HTMLElements.forEach(node => {
+        children.HTMLElements.forEach(child => {
+          node.appendChild(child.cloneNode(true));
         });
       });
     }
@@ -39,7 +48,7 @@ class DOMNodeCollection {
 
   attr(attributeName, value) {
     if (value) {
-      this.HTMLElements.forEach((element) => {
+      this.HTMLElements.forEach(element => {
         element.setAttribute(attributeName, value);
       });
       return this.HTMLElements;
@@ -48,7 +57,7 @@ class DOMNodeCollection {
   }
 
   addClass(className) {
-    this.HTMLElements.forEach((element) => {
+    this.HTMLElements.forEach(element => {
       let elClass = element.getAttribute('class');
       elClass += ` ${className}`;
       element.setAttribute('class', elClass);
@@ -56,18 +65,18 @@ class DOMNodeCollection {
   }
 
   removeClass(className) {
-    this.HTMLElements.forEach((element) => {
+    this.HTMLElements.forEach(element => {
       const removingClasses = className.split(' ');
       const elClass = element.getAttribute('class');
       const classes = elClass.split(' ')
-        .filter((el) => !removingClasses.includes(el));
+        .filter(el => !removingClasses.includes(el));
       element.setAttribute('class', classes.join(' '));
     });
   }
 
   children() {
     let childNodes = [];
-    this.HTMLElements.forEach((parent) => {
+    this.HTMLElements.forEach(parent => {
       const pChildren = Array.prototype.slice.call(parent.children);
       childNodes = childNodes.concat(pChildren);
     });
@@ -76,7 +85,7 @@ class DOMNodeCollection {
 
   parent() {
     const parents = [];
-    this.HTMLElements.forEach((child) => {
+    this.HTMLElements.forEach(child => {
       if (parents.every(p => !p.isEqualNode(child.parentNode))) {
         parents.push(child.parentNode);
       }
@@ -86,7 +95,7 @@ class DOMNodeCollection {
 
   find(selector) {
     let matchingDescendents = [];
-    this.HTMLElements.forEach((parent) => {
+    this.HTMLElements.forEach(parent => {
       const pDescendents = Array.prototype.slice.call(parent.querySelectorAll(selector));
       matchingDescendents = matchingDescendents.concat(pDescendents);
     });
@@ -94,14 +103,14 @@ class DOMNodeCollection {
   }
 
   remove() {
-    this.HTMLElements.forEach((el) => {
+    this.HTMLElements.forEach(el => {
       el.outerHTML = '';
     });
   }
 
   on(type, func) {
     const eventType = `dom-helper-${type}`;
-    this.HTMLElements.forEach((el) => {
+    this.HTMLElements.forEach(el => {
       el.addEventListener(type, func);
       if (Array.isArray(el[eventType])) {
         el[eventType].push(func);
@@ -112,9 +121,9 @@ class DOMNodeCollection {
   }
 
   off(type) {
-    this.HTMLElements.forEach((el) => {
+    this.HTMLElements.forEach(el => {
       const eventType = `dom-helper-${type}`;
-      el[eventType].forEach((func) => {
+      el[eventType].forEach(func => {
         el.removeEventListener(type, func);
       });
       el[eventType] = undefined;
@@ -122,4 +131,6 @@ class DOMNodeCollection {
   }
 }
 
-export default DOMNodeCollection;
+DOMNodeCollection.CONSTRUCTOR_ERROR = new Error('Invalid argument for DOMNodeCollection constructor, must be array of DOM nodes');
+
+module.exports = DOMNodeCollection;

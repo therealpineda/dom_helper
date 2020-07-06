@@ -1,8 +1,8 @@
-import DOMNodeCollection from './dom_node_collection';
+const DOMNodeCollection = require('./dom_node_collection');
 
 const docReadyFunctions = [];
 
-const $dh = (argument) => {
+const $dh = argument => {
   let nodeList;
   const domNodes = [];
   switch (typeof argument) {
@@ -12,7 +12,7 @@ const $dh = (argument) => {
       }
       if (argument.length) {
         const elements = Array.prototype.slice.call(argument);
-        elements.forEach((el) => {
+        elements.forEach(el => {
           if (el instanceof HTMLElement) {
             domNodes.push(el);
           }
@@ -25,7 +25,7 @@ const $dh = (argument) => {
       return undefined;
     case 'string':
       nodeList = document.querySelectorAll(argument);
-      nodeList.forEach((node) => domNodes.push(node));
+      nodeList.forEach(node => domNodes.push(node));
       return new DOMNodeCollection(domNodes);
     default:
       return undefined;
@@ -33,20 +33,20 @@ const $dh = (argument) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  docReadyFunctions.forEach((func) => func());
+  docReadyFunctions.forEach(func => func());
 });
 
 $dh.extend = (target, ...objects) => {
   const merged = target;
-  objects.forEach((obj) => {
-    Object.keys(obj).forEach((key) => {
+  objects.forEach(obj => {
+    Object.keys(obj).forEach(key => {
       merged[key] = obj[key];
     });
   });
   return merged;
 };
 
-$dh.ajax = (options) => new Promise((success, error) => {
+$dh.ajax = options => new Promise((success, error) => {
   const defaultOptions = {
     method: 'GET',
     url: document.location.pathname,

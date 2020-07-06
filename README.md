@@ -25,7 +25,7 @@ Live _demo_ (coming soon)!
 ### :sparkles: Factory Method
 
 #### `$dh(selector/element(s)/function)`
-Allows any HTML element(s) to be turned into a DOM Helper (DH) element collection, allowing access to all the awesome DOM Helper methods! This method can also be used to set callback function(s), which will be executed when the entire document is loaded.
+Allows any HTML element(s) to be turned into a DOM Helper element collection (DHC), allowing access to all the awesome DOM Helper methods! This method can also be used to set callback function(s), which will be executed when the entire document is loaded.
 
 ```js
 const docReadyFunctions = [];
@@ -61,7 +61,7 @@ Returns a collection of all descendent element(s) of the selected element(s) tha
 ### :pencil2: Adding and Editing Elements
 
 #### `html(string [opt'l])`
-Returns the inner HTML of any node. Also accepts a string as an argument which will become the innerHTML of the element(s).
+Returns the inner HTML of the first matched node. Or, accepts a string as an argument which will become the innerHTML of every matched element.
 
 #### `append(string/element/DH collection)`
 Appends the given argument to the end of the inner HTML of the selected element(s). Accepts a string, HTML element, or DOM Helper collection as its argument.
