@@ -91,7 +91,7 @@ Event types include: `'click'`, `'dblclick'`, `'mouseover'`, `'keypress'`, `'sel
 ```js
 on(type, func) {
   const eventType = `dom-helper-${type}`;
-  this.HTMLElements.forEach((el) => {
+  this.nodes.forEach((el) => {
     el.addEventListener(type, func);
     if (Array.isArray(el[eventType])) {
       el[eventType].push(func);

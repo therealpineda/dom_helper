@@ -2,7 +2,7 @@ const DOMNodeCollection = require('./dom_node_collection');
 
 const docReadyFunctions = [];
 
-const $dh = argument => {
+const $dh = (argument) => {
   let nodeList;
   const domNodes = [];
   switch (typeof argument) {
@@ -12,7 +12,7 @@ const $dh = argument => {
       }
       if (argument.length) {
         const elements = Array.prototype.slice.call(argument);
-        elements.forEach(el => {
+        elements.forEach((el) => {
           if (el instanceof HTMLElement) {
             domNodes.push(el);
           }
@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 $dh.extend = (target, ...objects) => {
   const merged = target;
-  objects.forEach(obj => {
-    Object.keys(obj).forEach(key => {
+  objects.forEach((obj) => {
+    Object.keys(obj).forEach((key) => {
       merged[key] = obj[key];
     });
   });

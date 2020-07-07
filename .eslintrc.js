@@ -8,7 +8,8 @@ module.exports = {
   },
   rules: {
     'no-param-reassign': ['error', { props: false }],
-    'arrow-parens': ['error', 'as-needed'],
+    'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
+
   },
   globals: {
     afterAll: true,
@@ -17,7 +18,7 @@ module.exports = {
     beforeEach: true,
     describe: true,
     expect: true,
-    it: true,
+    jest: true,
     test: true,
   },
 };

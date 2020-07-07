@@ -1,101 +1,95 @@
 class DOMNodeCollection {
-  constructor(HTMLElements) {
-    if (!Array.isArray(HTMLElements) || !HTMLElements.length) {
-      throw DOMNodeCollection.CONSTRUCTOR_ERROR;
+  constructor(nodes = []) {
+    if (!Array.isArray(nodes)) {
+      console.warn(DOMNodeCollection.CONSTRUCTOR_ERROR); // eslint-disable-line no-console
+      nodes = []; // eslint-disable-line no-param-reassign
     }
 
-    this.HTMLElements = HTMLElements;
-    this.length = HTMLElements.length;
+    this.nodes = nodes;
+    this.length = nodes.length;
+  }
+
+  // testing helper function
+  equals(collection) {
+    return this.length === collection.length
+      && this.nodes.every((node, i) => node.isEqualNode(collection.nodes[i]));
   }
 
   html(string = null) {
     if (string) {
       // assigns html content of all elements
-      this.HTMLElements.forEach(el => {
-        el.innerHTML = string;
-      });
-      return this.HTMLElements;
+      this.nodes.forEach((node) => { node.innerHTML = string; });
+      return this.nodes;
     }
     // returns for first-matched element
-    return this.HTMLElements[0].innerHTML;
+    return this.nodes[0].innerHTML;
   }
 
   empty() {
     // removes html content of all elements
-    this.HTMLElements.forEach(el => {
-      el.innerHTML = '';
-    });
+    this.nodes.forEach((node) => { node.innerHTML = ''; });
   }
 
-  append(children) {
+  append(children = null) {
     // uses cloneNode since same node can't be in multiple places
     if (typeof children === 'string') {
-      this.HTMLElements.forEach(node => {
-        node.innerHTML += children;
-      });
+      this.nodes.forEach((node) => { node.innerHTML += children; });
     } else if (children instanceof HTMLElement) {
-      this.HTMLElements.forEach(node => {
+      this.nodes.forEach((node) => {
         node.appendChild(children.cloneNode(true));
       });
     } else if (children instanceof DOMNodeCollection) {
-      this.HTMLElements.forEach(node => {
-        children.HTMLElements.forEach(child => {
+      this.nodes.forEach((node) => {
+        children.nodes.forEach((child) => {
           node.appendChild(child.cloneNode(true));
         });
       });
     }
   }
 
-  attr(attributeName, value) {
+  attr(attrName, value = null) {
     if (value) {
-      this.HTMLElements.forEach(element => {
-        element.setAttribute(attributeName, value);
-      });
-      return this.HTMLElements;
+      this.nodes.forEach(node => node.setAttribute(attrName, value));
+      return this.nodes;
     }
-    return this.HTMLElements[0].getAttribute(attributeName);
+    return this.nodes[0].getAttribute(attrName);
   }
 
-  addClass(className) {
-    this.HTMLElements.forEach(element => {
-      let elClass = element.getAttribute('class');
-      elClass += ` ${className}`;
-      element.setAttribute('class', elClass);
-    });
+  addClass(className = '') {
+    if (className) {
+      this.nodes.forEach(node => node.classList.add(className));
+    }
   }
 
-  removeClass(className) {
-    this.HTMLElements.forEach(element => {
-      const removingClasses = className.split(' ');
-      const elClass = element.getAttribute('class');
-      const classes = elClass.split(' ')
-        .filter(el => !removingClasses.includes(el));
-      element.setAttribute('class', classes.join(' '));
-    });
+  removeClass(className = '') {
+    if (className) {
+      this.nodes.forEach(node => node.classList.remove(className));
+    }
   }
 
   children() {
-    let childNodes = [];
-    this.HTMLElements.forEach(parent => {
-      const pChildren = Array.prototype.slice.call(parent.children);
-      childNodes = childNodes.concat(pChildren);
-    });
-    return new DOMNodeCollection(childNodes);
+    const nodes = this.nodes.reduce((arr, node) => arr.concat([...node.children]), []);
+
+    return new DOMNodeCollection(nodes);
   }
 
+  // return immediate parent of matching element(s)
   parent() {
-    const parents = [];
-    this.HTMLElements.forEach(child => {
-      if (parents.every(p => !p.isEqualNode(child.parentNode))) {
-        parents.push(child.parentNode);
+    const parents = this.nodes.reduce((arr, node) => {
+      const { parentNode } = node;
+      // don't add the same parent node twice
+      if (parentNode && arr.every(parent => !parent.isEqualNode(parentNode))) {
+        arr.push(parentNode);
       }
-    });
+      return arr;
+    }, []);
+
     return new DOMNodeCollection(parents);
   }
 
   find(selector) {
     let matchingDescendents = [];
-    this.HTMLElements.forEach(parent => {
+    this.nodes.forEach((parent) => {
       const pDescendents = Array.prototype.slice.call(parent.querySelectorAll(selector));
       matchingDescendents = matchingDescendents.concat(pDescendents);
     });
@@ -103,14 +97,12 @@ class DOMNodeCollection {
   }
 
   remove() {
-    this.HTMLElements.forEach(el => {
-      el.outerHTML = '';
-    });
+    this.nodes.forEach((node) => { node.outerHTML = ''; });
   }
 
   on(type, func) {
     const eventType = `dom-helper-${type}`;
-    this.HTMLElements.forEach(el => {
+    this.nodes.forEach((el) => {
       el.addEventListener(type, func);
       if (Array.isArray(el[eventType])) {
         el[eventType].push(func);
@@ -121,9 +113,9 @@ class DOMNodeCollection {
   }
 
   off(type) {
-    this.HTMLElements.forEach(el => {
+    this.nodes.forEach((el) => {
       const eventType = `dom-helper-${type}`;
-      el[eventType].forEach(func => {
+      el[eventType].forEach((func) => {
         el.removeEventListener(type, func);
       });
       el[eventType] = undefined;
